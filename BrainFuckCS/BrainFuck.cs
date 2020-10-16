@@ -17,7 +17,7 @@ namespace BrainFuckCS
                 c = code[currentpos];
                 if (c == '>') mempos++;
                 else if (c == '<' && mempos != 0) mempos--;
-                else if (c == '.') { output += memory[mempos]; Console.WriteLine(((char)memory[mempos]).ToString()); }
+                else if (c == '.') { output += memory[mempos]; Console.Write(((char)memory[mempos]).ToString()); }
                 else if (c == ',') memory[mempos] = Console.ReadLine().ToCharArray()[0];
                 else if (c == '+' && memory[mempos] != 255) memory[mempos]++;
                 else if (c == '+' && memory[mempos] == 255) memory[mempos] = (char)0;
