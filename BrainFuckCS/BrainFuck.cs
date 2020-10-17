@@ -17,11 +17,13 @@ namespace BrainFuckCS
             while (currentpos < code.Length)
             {
                 c = code[currentpos];
-                if (c == '>' && mempos != MaxMem) mempos++;
-                if (c == '>' && mempos == MaxMem) mempos = 0;
-                else if (c == '<' && mempos != 0) mempos--;
-                else if (c == '<' && mempos == 0 ) mempos = MaxMem;
-                else if (c == '.') { output += memory[mempos]; Console.Write(((char)memory[mempos]).ToString()); }
+                if (c == '>') mempos++;
+                else if (c == '<') mempos--;
+
+                if (mempos > MaxMem) { mempos = 0; }
+                else if (mempos < 0) { mempos = MaxMem; }
+
+                if (c == '.') { output += memory[mempos]; Console.Write((memory[mempos]).ToString()); }
                 else if (c == ',') memory[mempos] = Console.ReadLine().ToCharArray()[0];
                 else if (c == '+' && memory[mempos] != MaxASCII) memory[mempos]++;
                 else if (c == '+' && memory[mempos] == MaxASCII) memory[mempos] = (char)0;
