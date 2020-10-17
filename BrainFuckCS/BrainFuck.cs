@@ -15,8 +15,10 @@ namespace BrainFuckCS
             while (currentpos < code.Length)
             {
                 c = code[currentpos];
-                if (c == '>') mempos++;
+                if (c == '>' && mempos != MaxMem) mempos++;
+                if (c == '>' && mempos == MaxMem) mempos = 0;
                 else if (c == '<' && mempos != 0) mempos--;
+                else if (c == '<' && mempos == 0 ) mempos = MaxMem;
                 else if (c == '.') { output += memory[mempos]; Console.Write(((char)memory[mempos]).ToString()); }
                 else if (c == ',') memory[mempos] = Console.ReadLine().ToCharArray()[0];
                 else if (c == '+' && memory[mempos] != 255) memory[mempos]++;
