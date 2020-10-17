@@ -5,8 +5,10 @@ namespace BrainFuckCS
     public class BrainFuck
     {
         public static int MaxMem = 3000;
-        public static string Interpret(string s)
+        public static string Interpret(string s, bool extendedASCII)
         {
+            int MaxASCII = 127;
+            if (extendedASCII) { MaxASCII = 255; }
             char c;
             string output = "";
             int mempos = 0, currentpos = 0;
@@ -21,10 +23,10 @@ namespace BrainFuckCS
                 else if (c == '<' && mempos == 0 ) mempos = MaxMem;
                 else if (c == '.') { output += memory[mempos]; Console.Write(((char)memory[mempos]).ToString()); }
                 else if (c == ',') memory[mempos] = Console.ReadLine().ToCharArray()[0];
-                else if (c == '+' && memory[mempos] != 255) memory[mempos]++;
-                else if (c == '+' && memory[mempos] == 255) memory[mempos] = (char)0;
+                else if (c == '+' && memory[mempos] != MaxASCII) memory[mempos]++;
+                else if (c == '+' && memory[mempos] == MaxASCII) memory[mempos] = (char)0;
                 else if (c == '-' && memory[mempos] != 0) memory[mempos]--;
-                else if (c == '-' && memory[mempos] == 0) memory[mempos] = (char)255;
+                else if (c == '-' && memory[mempos] == 0) memory[mempos] = (char)MaxASCII;
                 else if (c == '[' && memory[mempos] == 0)
                 {
                     int open = 1;
